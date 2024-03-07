@@ -1,5 +1,7 @@
 # Author: William Lam
 # Website: www.williamlam.com
+# FORK BY Benoit Raymond.
+# Modification => use only Nested ESXi Host VI WLD deployment + VCF Host Commission. Look for comment = MANDATORY NESTED ESX
 
 # vCenter Server used to deploy VMware Cloud Foundation Lab
 $VIServer = "FILL-ME-IN"
@@ -7,7 +9,7 @@ $VIUsername = "FILL-ME-IN"
 $VIPassword = "FILL-ME-IN"
 
 # Full Path to both the Nested ESXi 8.0U2 & Cloud Builder OVA
-$NestedESXiApplianceOVA = "/root/Nested_ESXi8.0u2_Appliance_Template_v2.ova"
+$NestedESXiApplianceOVA = "/root/Nested_ESXi8.0u2_Appliance_Template_v2.ova" # MANDATORY NESTED ESX
 $CloudBuilderOVA = "/root/VMware-Cloud-Builder-5.1.0.0-22688368_OVF10.ova"
 
 # VCF Required Licenses
@@ -47,11 +49,11 @@ $NestedESXiHostnameToIPsForManagementDomain = @{
 }
 
 # Nested ESXi VMs for Workload Domain
-$NestedESXiHostnameToIPsForWorkloadDomain = @{
-    "vcf-m01-esx05"   = "172.17.31.189"
-    "vcf-m01-esx06"   = "172.17.31.190"
-    "vcf-m01-esx07"   = "172.17.31.191"
-    "vcf-m01-esx08"   = "172.17.31.192"
+$NestedESXiHostnameToIPsForWorkloadDomain = @{ # MANDATORY NESTED ESX
+    "vcf-m01-esx05"   = "172.17.31.189" # MANDATORY NESTED ESX
+    "vcf-m01-esx06"   = "172.17.31.190" # MANDATORY NESTED ESX
+    "vcf-m01-esx07"   = "172.17.31.191" # MANDATORY NESTED ESX
+    "vcf-m01-esx08"   = "172.17.31.192" # MANDATORY NESTED ESX
 }
 
 # Nested ESXi VM Resources for Management Domain
@@ -62,17 +64,17 @@ $NestedESXiMGMTCapacityvDisk = "250" #GB
 $NestedESXiMGMTBootDisk = "32" #GB
 
 # Nested ESXi VM Resources for Workload Domain
-$NestedESXiWLDvCPU = "8"
-$NestedESXiWLDvMEM = "24" #GB
-$NestedESXiWLDCachingvDisk = "4" #GB
-$NestedESXiWLDCapacityvDisk = "75" #GB
-$NestedESXiWLDBootDisk = "32" #GB
+$NestedESXiWLDvCPU = "8" # MANDATORY NESTED ESX
+$NestedESXiWLDvMEM = "24" #GB # MANDATORY NESTED ESX
+$NestedESXiWLDCachingvDisk = "4" #GB # MANDATORY NESTED ESX
+$NestedESXiWLDCapacityvDisk = "75" #GB # MANDATORY NESTED ESX
+$NestedESXiWLDBootDisk = "32" #GB # MANDATORY NESTED ESX
 
 # ESXi Network Configuration
-$NestedESXiManagementNetworkCidr = "172.17.31.0/24" # should match $VMNetwork configuration
-$NestedESXivMotionNetworkCidr = "172.17.32.0/24"
-$NestedESXivSANNetworkCidr = "172.17.33.0/24"
-$NestedESXiNSXTepNetworkCidr = "172.17.34.0/24"
+$NestedESXiManagementNetworkCidr = "172.17.31.0/24" # should match $VMNetwork configuration # MANDATORY NESTED ESX
+$NestedESXivMotionNetworkCidr = "172.17.32.0/24" # MANDATORY NESTED ESX
+$NestedESXivSANNetworkCidr = "172.17.33.0/24" # MANDATORY NESTED ESX
+$NestedESXiNSXTepNetworkCidr = "172.17.34.0/24" # MANDATORY NESTED ESX
 
 # vCenter Configuration
 $VCSAName = "vcf-m01-vc01"
@@ -90,18 +92,18 @@ $NSXAdminPassword = "VMware1!VMware1!"
 $NSXAuditPassword = "VMware1!VMware1!"
 
 # General Deployment Configuration for Nested ESXi & Cloud Builder VM
-$VMDatacenter = "San Jose"
-$VMCluster = "Compute Cluster"
-$VMNetwork = "sjc-comp-mgmt (1731)"
-$VMDatastore = "comp-vsanDatastore"
-$VMNetmask = "255.255.255.0"
-$VMGateway = "172.17.31.1"
-$VMDNS = "172.17.31.2"
-$VMNTP = "172.17.31.2"
-$VMPassword = "VMware1!"
-$VMDomain = "tshirts.inc"
-$VMSyslog = "172.17.31.182"
-$VMFolder = "VCF"
+$VMDatacenter = "San Jose" # MANDATORY NESTED ESX
+$VMCluster = "Compute Cluster" # MANDATORY NESTED ESX
+$VMNetwork = "sjc-comp-mgmt (1731)" # MANDATORY NESTED ESX
+$VMDatastore = "comp-vsanDatastore" # MANDATORY NESTED ESX
+$VMNetmask = "255.255.255.0" # MANDATORY NESTED ESX
+$VMGateway = "172.17.31.1" # MANDATORY NESTED ESX
+$VMDNS = "172.17.31.2" # MANDATORY NESTED ESX
+$VMNTP = "172.17.31.2" # MANDATORY NESTED ESX
+$VMPassword = "VMware1!" # MANDATORY NESTED ESX
+$VMDomain = "tshirts.inc" # MANDATORY NESTED ESX
+$VMSyslog = "172.17.31.182" # MANDATORY NESTED ESX
+$VMFolder = "VCF" # MANDATORY NESTED ESX
 
 #### DO NOT EDIT BEYOND HERE ####
 
@@ -112,12 +114,12 @@ $SeparateNSXSwitch = $false
 
 $preCheck = 1
 $confirmDeployment = 1
-$deployNestedESXiVMsForMgmt = 1
+$deployNestedESXiVMsForMgmt = 0
 $deployNestedESXiVMsForWLD = 1
-$deployCloudBuilder = 1
+$deployCloudBuilder = 0
 $moveVMsIntovApp = 1
-$generateMgmJson = 1
-$startVCFBringup = 1
+$generateMgmJson = 0
+$startVCFBringup = 0
 $generateWldHostCommissionJson = 1
 $uploadVCFNotifyScript = 0
 
