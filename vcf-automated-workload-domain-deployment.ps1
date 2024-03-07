@@ -1,5 +1,7 @@
 # Author: William Lam
 # Website: www.williamlam.com
+# FORK BY Benoit Raymond.
+# Modification => use only Nested ESXi Host VI WLD deployment + VCF Host Commission. Look for comment = MANDATORY NESTED ESX
 
 $sddcManagerFQDN = "FILL_ME_IN"
 $sddcManagerUsername = "FILL_ME_IN"
@@ -10,10 +12,10 @@ $VSANLicense = "FILL_ME_IN"
 $NSXLicense = "FILL_ME_IN"
 
 # Management Domain Configurations
-$VCFManagementDomainPoolName = "vcf-m01-rp01"
+$VCFManagementDomainPoolName = "vcf-m01-rp01" # MANDATORY NESTED ESX
 
 # Workload Domain Configurations
-$VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json"
+$VCFWorkloadDomainAPIJSONFile = "vcf-commission-host-api.json" # MANDATORY NESTED ESX
 $VCFWorkloadDomainName = "wld-w01"
 $VCFWorkloadDomainOrgName = "vcf-w01"
 
@@ -41,8 +43,8 @@ $VMDomain = "tshirts.inc"
 
 $confirmDeployment = 1
 $commissionHost = 1
-$generateWLDDeploymentFile = 1
-$startWLDDeployment = 1
+$generateWLDDeploymentFile = 0
+$startWLDDeployment = 0
 
 $verboseLogFile = "vcf-workload-domain-deployment.log"
 $VCFWorkloadDomainDeploymentJSONFile = "${VCFWorkloadDomainName}.json"
