@@ -1,5 +1,16 @@
 # Automated VMware Cloud Foundation Lab Deployment
 
+### **** FORK BY benoit-raymond ****
+Fork reason : only use for Nested ESXi VI WLD deployment
+
+
+In the variables sections look for the lines with `MANDATORY NESTED ESX`comment and replace the field with your environment values.
+
+Run the powershell fork scripts: `vcf-automated-lab-deployment.ps1` then `vcf-automated-workload-domain-deployment.ps1`
+
+### **** END OF FORK CHANGES ****
+
+
 ## Table of Contents
 
 * [Description](#description)
