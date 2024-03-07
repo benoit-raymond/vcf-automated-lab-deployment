@@ -3,9 +3,9 @@
 # FORK BY Benoit Raymond.
 # Modification => use only Nested ESXi Host VI WLD deployment + VCF Host Commission. Look for comment = MANDATORY NESTED ESX
 
-$sddcManagerFQDN = "FILL_ME_IN"
-$sddcManagerUsername = "FILL_ME_IN"
-$sddcManagerPassword = "FILL_ME_IN"
+$sddcManagerFQDN = "FILL_ME_IN" # MANDATORY NESTED ESX
+$sddcManagerUsername = "FILL_ME_IN" # MANDATORY NESTED ESX
+$sddcManagerPassword = "FILL_ME_IN" # MANDATORY NESTED ESX
 
 $ESXILicense = "FILL_ME_IN"
 $VSANLicense = "FILL_ME_IN"
@@ -126,7 +126,8 @@ if($commissionHost -eq 1) {
     $json.replace("TBD",$mgmtPoolId) | Out-File $VCFWorkloadDomainAPIJSONFile
 
     My-Logger "Validating ESXi host commission file $VCFWorkloadDomainAPIJSONFile ..."
-    $commissionHostValidationResult = New-VCFCommissionedHost -json (Get-Content -Raw $VCFWorkloadDomainAPIJSONFile) -Validate
+    #$commissionHostValidationResult = New-VCFCommissionedHost -json (Get-Content -Raw $VCFWorkloadDomainAPIJSONFile) -Validate
+    $commissionHostValidationResult = New-VCFCommissionedHost -json $VCFWorkloadDomainAPIJSONFile -Validate
 
     if($commissionHostValidationResult.resultStatus) {
         $commissionHostResult = New-VCFCommissionedHost -json (Get-Content -Raw $VCFWorkloadDomainAPIJSONFile)
