@@ -130,7 +130,8 @@ if($commissionHost -eq 1) {
     $commissionHostValidationResult = New-VCFCommissionedHost -json $VCFWorkloadDomainAPIJSONFile -Validate
 
     if($commissionHostValidationResult.resultStatus) {
-        $commissionHostResult = New-VCFCommissionedHost -json (Get-Content -Raw $VCFWorkloadDomainAPIJSONFile)
+        #$commissionHostResult = New-VCFCommissionedHost -json (Get-Content -Raw $VCFWorkloadDomainAPIJSONFile)
+        $commissionHostResult = New-VCFCommissionedHost -json $VCFWorkloadDomainAPIJSONFile
     } else {
         Write-Error "Validation of host commission file $VCFWorkloadDomainAPIJSONFile failed"
         break
